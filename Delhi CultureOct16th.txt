@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delhi Cultural Fieldwork Guide | デリー文化フィールドワークガイド</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            600: '#9a3412',
+                            700: '#7c2d12',
+                            800: '#65280f',
+                            900: '#53220d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Sans JP -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brand-600 text-white p-2 rounded-xl shadow-md">
+                    <i class="fa-solid fa-monument text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg tracking-tight">Delhi Cultural Guide</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Delhi, India | Japanese Student Edition</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Language Toggle Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3 py-1.5 text-xs sm:text-sm font-medium bg-brand-100 text-brand-800 dark:bg-slate-700 dark:text-brand-300 rounded-lg hover:bg-brand-200 dark:hover:bg-slate-600 transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="langLabel">日本語 / EN</span>
+                </button>
+                <!-- Quick jump navigation dropdown -->
+                <select id="sectionJump" onchange="jumpToSection(this.value)" class="hidden md:block text-xs sm:text-sm bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-brand-600">
+                    <option value="" disabled selected data-en="Jump to Section..." data-ja="セクションを選択...">Jump to Section...</option>
+                    <option value="section1" data-en="1. Humayun's Tomb" data-ja="1. フマユーン廟">1. Humayun's Tomb</option>
+                    <option value="section2" data-en="2. Akshardham Temple" data-ja="2. アークシャルダム寺院">2. Akshardham Temple</option>
+                    <option value="section3" data-en="3. National Crafts Museum" data-ja="3. 国立民芸博物館">3. National Crafts Museum</option>
+                    <option value="section-interactive" data-en="Fieldwork & Quiz" data-ja="フィールドワーク＆クイズ">Fieldwork & Quiz</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-12">
+        <section class="bg-gradient-to-r from-brand-800 via-amber-900 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
+            <div class="absolute right-0 top-0 translate-x-8 -translate-y-8 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-3xl relative z-10 space-y-4">
+                <span class="inline-block px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-semibold rounded-full uppercase tracking-wider">
+                    <span class="en-text">Student Learning Guide • Delhi, India</span>
+                    <span class="ja-text hidden">生徒用学習ガイド • インド・デリー</span>
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-bold tracking-tight">
+                    <span class="en-text">Discovering India’s History, Religion and Traditional Arts</span>
+                    <span class="ja-text hidden">インドの歴史・宗教・伝統芸術の探求</span>
+                </h2>
+                <p class="text-sm sm:text-base text-slate-200 leading-relaxed">
+                    <span class="en-text">Designed for Japanese high school students visiting three important cultural sites in Delhi. Explore what you will see and why these places matter to Indian history, society, religion, and culture.</span>
+                    <span class="ja-text hidden">デリーの3つの重要な文化遺産を訪れる日本の高校生のためにデザインされたガイドです。見学する内容だけでなく、インドの歴史や社会、宗教、文化においてなぜこれらの場所が重要なのかを解説します。</span>
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2 text-xs font-medium">
+                    <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-landmark text-amber-300"></i> <span class="en-text">Section 1: Humayun's Tomb</span><span class="ja-text hidden">第1章：フマユーン廟</span>
+                    </span>
+                    <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-place-of-worship text-amber-300"></i> <span class="en-text">Section 2: Akshardham</span><span class="ja-text hidden">第2章：アークシャルダム寺院</span>
+                    </span>
+                    <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-1.5">
+                        <i class="fa-solid fa-palette text-amber-300"></i> <span class="en-text">Section 3: Crafts Museum</span><span class="ja-text hidden">第3章：国立民芸博物館</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="section1" class="bg-white dark:bg-slate-800 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center space-x-4 border-b border-slate-100 dark:border-slate-700 pb-4">
+                <div class="bg-brand-100 dark:bg-brand-900/40 text-brand-800 dark:text-brand-300 w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl shadow-inner">
+                    1
+                </div>
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                        <span class="en-text">Humayun’s Tomb and the Mughal Empire</span>
+                        <span class="ja-text hidden">フマユーン廟とムガル帝国</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                        <span class="en-text">History, architecture and cultural exchange</span>
+                        <span class="ja-text hidden">歴史、建築、文化的交流</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Info Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Construction</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">1565–1572</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Location</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Nizamuddin, Delhi</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">World Heritage</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">UNESCO, 1993</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Style</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Mughal–Persian</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                <h4 class="font-bold text-slate-900 dark:text-white text-base">
+                    <span class="en-text">1.1 What is Humayun’s Tomb?</span>
+                    <span class="ja-text hidden">1.1 フマユーン廟とは何か？</span>
+                </h4>
+                <p>
+                    <span class="en-text">Humayun’s Tomb is a magnificent royal mausoleum built for Humayun, the second emperor of the Mughal Empire who ruled northern India during the 16th century. Commissioned by his widow Empress Bega Begum and designed by Persian architect Mirak Mirza Ghiyas, it was the first great imperial Mughal garden-tomb on the Indian subcontinent, inspiring later monuments like the Taj Mahal.</span>
+                    <span class="ja-text hidden">フマユーン廟は、16世紀に北インドを統治したムガル帝国の第2代皇帝フマユーンのために建てられた壮麗な王墓です。未亡人であったベガ・ベグム（ハジ・ベグム）皇后が発注し、ペルシャ出身の建築家ミラク・ミルザ・ギヤスが設計しました。インド亜大陸における最初期の皇帝の庭園墓であり、のちのタージ・マハルなど多くの建造物に影響を与えました。</span>
+                </p>
+
+                <h4 class="font-bold text-slate-900 dark:text-white text-base pt-2">
+                    <span class="en-text">1.2 Who were the Mughals? The Six Major Early Emperors</span>
+                    <span class="ja-text hidden">1.2 ムガル帝国とは？ 初期6人の主要皇帝</span>
+                </h4>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <li class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>1. Babur (1526–1530):</strong> <span class="en-text">Founded the empire after defeating Ibrahim Lodi at Panipat.</span><span class="ja-text hidden">パーニパットの戦いで勝利し帝国を創設。</span>
+                    </li>
+                    <li class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>2. Humayun (1530–1540; 1555–1556):</strong> <span class="en-text">Lost empire, lived in exile, regained Delhi.</span><span class="ja-text hidden">一時帝国の座を追われ、のちにデリーを奪還。</span>
+                    </li>
+                    <li class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>3. Akbar (1556–1605):</strong> <span class="en-text">Expanded empire, improved administration, encouraged religious dialogue.</span><span class="ja-text hidden">領土を拡大し、行政を整備し宗教的対話を促進。</span>
+                    </li>
+                    <li class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>4. Jahangir (1605–1627):</strong> <span class="en-text">Patron of painting, gardens, and natural history.</span><span class="ja-text hidden">絵画や庭園、自然科学の庇護者として知られる。</span>
+                    </li>
+                    <li class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>5. Shah Jahan (1628–1658):</strong> <span class="en-text">Commissioned the iconic Taj Mahal in Agra.</span><span class="ja-text hidden">アグラのタージ・マハルを建設。</span>
+                    </li>
+                    <li class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>6. Aurangzeb (1658–1707):</strong> <span class="en-text">Maximal territorial extent, but caused severe political and religious tensions.</span><span class="ja-text hidden">最大版図を築いたが、長引く戦争と宗教政策で混乱。</span>
+                    </li>
+                </ul>
+
+                <h4 class="font-bold text-slate-900 dark:text-white text-base pt-2">
+                    <span class="en-text">1.4 Architecture & The Taj Mahal Connection</span>
+                    <span class="ja-text hidden">1.4 建築上の特徴とタージ・マハルとのつながり</span>
+                </h4>
+                <p>
+                    <span class="en-text">The tomb masterfully blends red sandstone and white marble. It features a grand double-dome design, geometric symmetry, and a charbagh (four-part garden) symbolizing paradise. Humayun's Tomb was built 70–80 years before the Taj Mahal; while Humayun's tomb relies heavily on red sandstone, the Taj Mahal is famous for white marble.</span>
+                    <span class="ja-text hidden">赤砂岩と白大理石のコントラスト、壮大な二重構造のドーム、厳密な左右対称、そして天国を表すチャルバグ（4分割の庭園）が特徴です。タージ・マハルの70〜80年前に建てられ、赤砂岩を主体とするフマユーン廟と、白大理石のタージ・マハルの発展の歴史を比較できます。</span>
+                </p>
+
+                <!-- Vocabulary Accordion / Box -->
+                <div class="mt-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h5 class="font-bold text-sm text-brand-700 dark:text-brand-400 mb-2">
+                        <span class="en-text"><i class="fa-solid fa-book-bookmark"></i> Key Vocabulary (Section 1)</span>
+                        <span class="ja-text hidden"><i class="fa-solid fa-book-bookmark"></i> 重要単語（第1章）</span>
+                    </h5>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        <div><strong class="text-slate-900 dark:text-white">Empire:</strong> 帝国（ていこく）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Emperor:</strong> 皇帝（こうてい）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Mausoleum:</strong> 霊廟（れいびょう）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Architecture:</strong> 建築（けんちく）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Dome:</strong> ドーム・丸屋根</div>
+                        <div><strong class="text-slate-900 dark:text-white">Symmetry:</strong> 左右対称（さゆうたいしょう）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Sandstone:</strong> 砂岩（さがん）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Marble:</strong> 大理石（だいりせき）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Cultural Heritage:</strong> 文化遺産</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section2" class="bg-white dark:bg-slate-800 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center space-x-4 border-b border-slate-100 dark:border-slate-700 pb-4">
+                <div class="bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl shadow-inner">
+                    2
+                </div>
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                        <span class="en-text">Akshardham Temple, Delhi</span>
+                        <span class="ja-text hidden">アークシャルダム寺院（デリー）</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                        <span class="en-text">Hinduism, spirituality and Indian values</span>
+                        <span class="ja-text hidden">ヒンドゥー教、精神性、インドの価値観</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Info Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Inaugurated</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">November 6, 2005</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Organization</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">BAPS Swaminarayan</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Tradition</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Hinduism</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Key Feature</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Pink Sandstone & Marble</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                <h4 class="font-bold text-slate-900 dark:text-white text-base">
+                    <span class="en-text">2.1 What is Akshardham?</span>
+                    <span class="ja-text hidden">2.1 アークシャルダムとは何か？</span>
+                </h4>
+                <p>
+                    <span class="en-text">Swaminarayan Akshardham is a massive Hindu temple and cultural complex inaugurated in November 2005. Built by BAPS and inspired by Pramukh Swami Maharaj, it celebrates Hindu spiritual traditions, timeless Indian values, and exquisite craftsmanship using pink sandstone and white marble without steel reinforcement.</span>
+                    <span class="ja-text hidden">スワミナラヤン・アークシャルダムは、2005年11月に開館した巨大なヒンドゥー教寺院・文化コンプレックスです。BAPSにより建設され、プラムク・スワミ・マハラジにインスパイアされたこの施設は、ヒンドゥーの精神的伝統とインドの価値観を、鉄骨を使わない伝統的なピンク砂岩と大理石の彫刻で体現しています。</span>
+                </p>
+
+                <h4 class="font-bold text-slate-900 dark:text-white text-base pt-2">
+                    <span class="en-text">2.2 Core Concepts of Hinduism</span>
+                    <span class="ja-text hidden">2.2 ヒンドゥー教の核心的概念</span>
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Dharma (法・義務):</strong> <span class="en-text">Living responsibly, fulfilling moral and social duties.</span><span class="ja-text hidden">責任を持って生き、道徳的・社会的な義務を果たすこと。</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Karma (業・因果応報):</strong> <span class="en-text">Intentional actions have consequences extending across lifetimes.</span><span class="ja-text hidden">意図的な行動には、来世に及ぶ結果が伴うという考え。</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Moksha (解脱):</strong> <span class="en-text">Freedom from the cycle of birth, death, and rebirth (samsara).</span><span class="ja-text hidden">生と死、輪廻（サンサーラ）からの解放。</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Puja (礼拝):</strong> <span class="en-text">Worship involving prayers, offerings, chants, and lamps.</span><span class="ja-text hidden">祈り、お供え、詠唱、ランプを用いた宗教的実践。</span>
+                    </div>
+                </div>
+
+                <h4 class="font-bold text-slate-900 dark:text-white text-base pt-2">
+                    <span class="en-text">2.5 Main Attractions & Exhibitions</span>
+                    <span class="ja-text hidden">2.5 主なアトラクションと展示</span>
+                </h4>
+                <ul class="space-y-2 text-sm">
+                    <li><strong>Hall of Values (Sahajanand Darshan):</strong> <span class="en-text">Uses figures and multimedia to teach compassion, non-violence, and humility.</span><span class="ja-text hidden">人形劇やマルチメディアで慈悲や非暴力、謙虚さを教えます。</span></li>
+                    <li><strong>Neelkanth Darshan:</strong> <span class="en-text">Giant-screen film tracking the teenage pilgrimage of Swaminarayan across India.</span><span class="ja-text hidden">インド全土を巡った若い巡礼者スワミナラヤンの旅を描く大画面映画。</span></li>
+                    <li><strong>Sanskruti Darshan:</strong> <span class="en-text">Cultural boat ride highlighting India's ancient contributions to science, art, and education.</span><span class="ja-text hidden">科学や芸術における古代インドの貢献を紹介する文化ボートツアー。</span></li>
+                    <li><strong>Sahaj Anand Water Show:</strong> <span class="en-text">Fountains, lasers, and music telling an ancient Kena Upanishad story on inner joy.</span><span class="ja-text hidden">ウパニシャッドの物語を伝える、噴水・レーザー・音楽の壮大なウォーターショー。</span></li>
+                </ul>
+
+                <!-- Vocabulary Box -->
+                <div class="mt-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h5 class="font-bold text-sm text-brand-700 dark:text-brand-400 mb-2">
+                        <span class="en-text"><i class="fa-solid fa-book-bookmark"></i> Key Vocabulary (Section 2)</span>
+                        <span class="ja-text hidden"><i class="fa-solid fa-book-bookmark"></i> 重要単語（第2章）</span>
+                    </h5>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        <div><strong class="text-slate-900 dark:text-white">Hinduism:</strong> ヒンドゥー教</div>
+                        <div><strong class="text-slate-900 dark:text-white">Temple:</strong> 寺院（じいん）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Spirituality:</strong> 精神性（せいしんせい）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Worship:</strong> 礼拝（れいはい）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Devotion:</strong> 信仰心（しんこうしん）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Compassion:</strong> 思いやり・慈悲</div>
+                        <div><strong class="text-slate-900 dark:text-white">Non-violence:</strong> 非暴力（ひぼうりょく）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Reincarnation:</strong> 輪廻転生（りんね）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Liberation:</strong> 解脱（げだつ）</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section3" class="bg-white dark:bg-slate-800 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 p-6 sm:p-8 space-y-6">
+            <div class="flex items-center space-x-4 border-b border-slate-100 dark:border-slate-700 pb-4">
+                <div class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl shadow-inner">
+                    3
+                </div>
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                        <span class="en-text">National Crafts Museum & Hastkala Academy</span>
+                        <span class="ja-text hidden">国立民芸博物館（ハストカラ・アカデミー）</span>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                        <span class="en-text">Traditional arts, regional cultures and craftsmanship</span>
+                        <span class="ja-text hidden">伝統芸術、地域文化、職人技</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Info Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Established</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">1956 (Site: 1977-90)</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Architect</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Charles Correa</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Collection</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">~29,395 Objects</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block font-medium">Focus</span>
+                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Folk Arts & Artisans</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                <h4 class="font-bold text-slate-900 dark:text-white text-base">
+                    <span class="en-text">3.1 What is the National Crafts Museum?</span>
+                    <span class="ja-text hidden">3.1 国立民芸博物館とは何か？</span>
+                </h4>
+                <p>
+                    <span class="en-text">Designed by renowned architect Charles Correa, this museum celebrates the creativity of ordinary people, rural artisans, and communities. Rather than focusing on kings and wars, it highlights textiles, folk paintings, metalwork, terracotta, and regional village architecture.</span>
+                    <span class="ja-text hidden">著名な建築家チャールズ・コレアによって設計されたこの博物館は、王や戦争ではなく、一般の人々や地方の職人、コミュニティの創造性に焦点を当てています。テキスタイル、民俗絵画、金属工芸、素焼き（テラコッタ）、そして地方の村落建築を展示しています。</span>
+                </p>
+
+                <h4 class="font-bold text-slate-900 dark:text-white text-base pt-2">
+                    <span class="en-text">3.4 Traditional Indian Textiles & Techniques</span>
+                    <span class="ja-text hidden">3.4 インドの伝統的テキスタイルと技法</span>
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Bandhani (タイダイ・絞り染め):</strong> <span class="en-text">Cloth tightly tied before dyeing to create dot patterns (Gujarat/Rajasthan).</span><span class="ja-text hidden">染める前に布をきつく縛り、ドット柄を作る（グジャラート/ラジャスタン）。</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Ikat (絣・かすり):</strong> <span class="en-text">Threads dyed in precise patterns before weaving together.</span><span class="ja-text hidden">織る前に糸を精密なパターンで染め上げる技法（日本の「絣」に類似）。</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Chikankari (刺繍):</strong> <span class="en-text">Delicate floral embroidery traditionally from Lucknow, Uttar Pradesh.</span><span class="ja-text hidden">ウッタル・プラデシュ州ラクナウの繊細な花柄の刺繍。</span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-3 rounded-lg border border-slate-200 dark:border-slate-600">
+                        <strong>Dhokra (ロストワックス鋳造):</strong> <span class="en-text">Traditional metal casting using the lost-wax (cire perdue) technique.</span><span class="ja-text hidden">失われたワックス（ロウ）を用いた伝統的な金属鋳造法。</span>
+                    </div>
+                </div>
+
+                <h4 class="font-bold text-slate-900 dark:text-white text-base pt-2">
+                    <span class="en-text">3.10 Connections with Japan: Mingei & Kasuri</span>
+                    <span class="ja-text hidden">3.10 日本とのつながり：民芸運動と絣（かすり）</span>
+                    <p class="text-sm mt-1">
+                        <span class="en-text">Both India and Japan possess deep traditions of regional craftsmanship. Just as Japan's <em>Mingei</em> movement championed the beauty of everyday handmade objects, the Crafts Museum honors ordinary artisans. Furthermore, Indian <em>Ikat</em> shares strong conceptual parallels with Japanese <em>Kasuri</em> weaving.</span>
+                        <span class="ja-text hidden">インドと日本には、どちらも豊かな地域の手仕事の伝統があります。日本の「民芸運動」が日常の手仕事のなかに美を見出したように、当館も名もなき職人の技を称えています。また、インドのイカットは日本の「絣」と深く通じ合っています。</span>
+                    </p>
+                </h4>
+
+                <!-- Vocabulary Box -->
+                <div class="mt-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h5 class="font-bold text-sm text-brand-700 dark:text-brand-400 mb-2">
+                        <span class="en-text"><i class="fa-solid fa-book-bookmark"></i> Key Vocabulary (Section 3)</span>
+                        <span class="ja-text hidden"><i class="fa-solid fa-book-bookmark"></i> 重要単語（第3章）</span>
+                    </h5>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        <div><strong class="text-slate-900 dark:text-white">Handicraft:</strong> 手工芸（しゅこうげい）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Artisan:</strong> 職人（しょくにん）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Weaving:</strong> 織物（おりもの）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Dyeing:</strong> 染色（せんしょく）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Embroidery:</strong> 刺繍（ししゅう）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Pottery:</strong> 陶芸（とうげい）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Terracotta:</strong> 素焼き（すやき）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Folk Art:</strong> 民芸（みんげい）</div>
+                        <div><strong class="text-slate-900 dark:text-white">Sustainable:</strong> 持続可能な</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-interactive" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Fieldwork Checklist -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-4">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                            <span class="en-text">Student Fieldwork Checklist</span>
+                            <span class="ja-text hidden">生徒のフィールドワーク チェックリスト</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            <span class="en-text">Complete tasks as you explore the three sites</span>
+                            <span class="ja-text hidden">3つのサイトを巡りながらタスクを完了しよう</span>
+                        </p>
+                    </div>
+                    <span id="checklistCount" class="bg-brand-100 text-brand-800 dark:bg-slate-700 dark:text-brand-300 font-bold text-sm px-3 py-1 rounded-full">0 / 9</span>
+                </div>
+
+                <div class="space-y-3" id="checklistContainer">
+                    <!-- Checklists injected via JS -->
+                </div>
+                <button onclick="resetChecklist()" class="text-xs text-brand-600 dark:text-brand-400 font-semibold hover:underline">
+                    <span class="en-text">Reset Checklist</span>
+                    <span class="ja-text hidden">チェックリストをリセット</span>
+                </button>
+            </div>
+
+            <!-- Interactive Quiz -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 p-6 sm:p-8 space-y-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-4 mb-4">
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                                <span class="en-text">Interactive Knowledge Check</span>
+                                <span class="ja-text hidden">インタラクティブ知識確認クイズ</span>
+                            </h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">
+                                <span class="en-text">Test what you learned about Delhi's heritage</span>
+                                <span class="ja-text hidden">デリーの文化遺産の知識をテストしよう</span>
+                            </p>
+                        </div>
+                        <span id="quizScoreBadge" class="bg-amber-100 text-amber-800 dark:bg-slate-700 dark:text-amber-300 font-bold text-sm px-3 py-1 rounded-full">0 / 6</span>
+                    </div>
+
+                    <div id="quizContainer" class="space-y-4">
+                        <!-- Quiz rendered dynamically -->
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                    <button onclick="checkQuizAnswers()" class="px-5 py-2 bg-brand-600 hover:bg-brand-700 text-white font-medium text-sm rounded-xl shadow transition">
+                        <span class="en-text">Check Answers</span>
+                        <span class="ja-text hidden">解答をチェック</span>
+                    </button>
+                    <button onclick="resetQuiz()" class="text-xs text-slate-500 hover:underline">
+                        <span class="en-text">Try Again</span>
+                        <span class="ja-text hidden">やり直す</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-slate-100 dark:bg-slate-800/60 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 space-y-4">
+            <h4 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-brand-600"></i>
+                <span class="en-text">Important Visiting Information</span>
+                <span class="ja-text hidden">見学時の重要なお知らせ・マナー</span>
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                    <strong class="block text-slate-900 dark:text-white mb-1">Humayun's Tomb</strong>
+                    <span class="en-text">Protected UNESCO World Heritage monument. Respect historic stonework and gardens.</span>
+                    <span class="ja-text hidden">ユネスコ世界遺産。歴史ある石造建築や庭園を大切に扱いましょう。</span>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                    <strong class="block text-slate-900 dark:text-white mb-1">Akshardham Temple</strong>
+                    <span class="en-text">Mobile phones, cameras & electronics are prohibited inside. Cover shoulders and knees. Closed Mondays.</span>
+                    <span class="ja-text hidden">携帯・カメラ等の電子機器は持ち込み禁止。肩と膝を隠す服装で。月曜休館。</span>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                    <strong class="block text-slate-900 dark:text-white mb-1">National Crafts Museum</strong>
+                    <span class="en-text">Open Tuesday–Sunday (10:00–18:00). Support living artisans and traditional demonstrations.</span>
+                    <span class="ja-text hidden">火曜〜日曜開館（10:00〜18:00）。現役職人や実演を尊重しましょう。</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 mt-12 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <p>Delhi Cultural Fieldwork Guide for Japanese High School Students | English & Japanese Bilingual Edition</p>
+        <p class="mt-1">Designed for collaborative historical and cultural exploration in Delhi, India.</p>
+    </footer>
+
+    <script>
+        // Language state: 'en' or 'ja'
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ja' : 'en';
+            updateLanguageDisplay();
+        }
+
+        function updateLanguageDisplay() {
+            const enElements = document.querySelectorAll('.en-text');
+            const jaElements = document.querySelectorAll('.ja-text');
+
+            if (currentLang === 'ja') {
+                enElements.forEach(el => el.classList.add('hidden'));
+                jaElements.forEach(el => el.classList.remove('hidden'));
+                document.getElementById('langLabel').innerText = 'English / 日';
+            } else {
+                enElements.forEach(el => el.classList.remove('hidden'));
+                jaElements.forEach(el => el.classList.add('hidden'));
+                document.getElementById('langLabel').innerText = '日本語 / EN';
+            }
+            renderChecklist();
+            renderQuiz();
+        }
+
+        function jumpToSection(sectionId) {
+            if (sectionId) {
+                const el = document.getElementById(sectionId);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Fieldwork Checklist Data
+        const checklistItems = [
+            { id: 1, en: "Humayun's Tomb: Identify three examples of symmetry.", ja: "フマユーン廟：左右対称の例を3つ見つける" },
+            { id: 2, en: "Humayun's Tomb: Find two architectural features also seen at the Taj Mahal.", ja: "フマユーン廟：タージ・マハルにも見られる建築的特徴を2つ見つける" },
+            { id: 3, en: "Humayun's Tomb: Explain one way Persian and Indian traditions influenced the building.", ja: "フマユーン廟：ペルシャとインドの伝統が建築に影響を与えた点の説明" },
+            { id: 4, en: "Akshardham: Identify two values emphasized in the temple's teachings.", ja: "アークシャルダム：教えの中で強調されている価値観を2つ挙げる" },
+            { id: 5, en: "Akshardham: Find three examples of traditional stone craftsmanship.", ja: "アークシャルダム：伝統的な石の職人技の例を3つ見つける" },
+            { id: 6, en: "Akshardham: Describe one similarity and one difference with Japanese religious buildings.", ja: "アークシャルダム：日本の宗教建築との共通点と相違点を1つずつ説明する" },
+            { id: 7, en: "Crafts Museum: Identify three different materials used by artisans.", ja: "民芸博物館：職人が使用する異なる素材を3つ挙げる" },
+            { id: 8, en: "Crafts Museum: Find a craft technique similar to one used in Japan.", ja: "民芸博物館：日本で使われる技法に似た工芸技術を見つける" },
+            { id: 9, en: "Crafts Museum: Explain how a traditional craft could survive in the modern economy.", ja: "民芸博物館：伝統工芸が現代経済で生き残る方法を説明する" }
+        ];
+
+        let checkedState = JSON.parse(localStorage.getItem('delhi_checklist') || '{}');
+
+        function renderChecklist() {
+            const container = document.getElementById('checklistContainer');
+            container.innerHTML = '';
+            let completedCount = 0;
+
+            checklistItems.forEach(item => {
+                const isChecked = checkedState[item.id] || false;
+                if (isChecked) completedCount++;
+
+                const div = document.createElement('label');
+                div.className = `flex items-start space-x-3 p-3 rounded-xl border transition cursor-pointer ${isChecked ? 'bg-brand-50/50 dark:bg-brand-900/20 border-brand-200 dark:border-brand-800' : 'bg-slate-50 dark:bg-slate-900/40 border-slate-200 dark:border-slate-700'}`;
+                
+                div.innerHTML = `
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleCheck(${item.id})" class="mt-1 h-4 w-4 text-brand-600 focus:ring-brand-500 border-slate-300 rounded">
+                    <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 select-none ${isChecked ? 'line-through opacity-75' : ''}">
+                        ${currentLang === 'ja' ? item.ja : item.en}
+                    </span>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('checklistCount').innerText = `${completedCount} / ${checklistItems.length}`;
+        }
+
+        function toggleCheck(id) {
+            checkedState[id] = !checkedState[id];
+            localStorage.setItem('delhi_checklist', JSON.stringify(checkedState));
+            renderChecklist();
+        }
+
+        function resetChecklist() {
+            checkedState = {};
+            localStorage.removeItem('delhi_checklist');
+            renderChecklist();
+        }
+
+        // Quiz Data
+        const quizData = [
+            {
+                qEn: "Which Mughal emperor was buried at Humayun’s Tomb?",
+                qJa: "フマユーン廟に埋葬されたムガル帝国の皇帝は誰ですか？",
+                optionsEn: ["Babur", "Humayun", "Shah Jahan"],
+                optionsJa: ["バーブル", "フマユーン", "シャー・ジャハーン"],
+                correct: 1
+            },
+            {
+                qEn: "What does charbagh describe?",
+                qJa: "「チャルバグ」とは何を指しますか？",
+                optionsEn: ["A four-part garden", "A type of marble crown", "An emperor’s throne"],
+                optionsJa: ["4分割された庭園", "大理石の王冠", "皇帝の玉座"],
+                correct: 0
+            },
+            {
+                qEn: "When was Akshardham inaugurated?",
+                qJa: "アークシャルダム寺院が開館したのは何年ですか？",
+                optionsEn: ["1570", "1857", "2005"],
+                optionsJa: ["1570年", "1857年", "2005年"],
+                correct: 2
+            },
+            {
+                qEn: "What is a mandir?",
+                qJa: "「マンディル（Mandir）」とは何ですか？",
+                optionsEn: ["A marketplace", "A Hindu temple", "A royal tomb"],
+                optionsJa: ["市場", "ヒンドゥー教寺院", "王の墓"],
+                correct: 1
+            },
+            {
+                qEn: "Which technique involves dyeing threads before weaving?",
+                qJa: "織る前に糸を染める技法はどれですか？",
+                optionsEn: ["Ikat", "Pottery", "Stone carving"],
+                optionsJa: ["イカット（絣）", "陶芸", "石彫刻"],
+                correct: 0
+            },
+            {
+                qEn: "What is a major purpose of the National Crafts Museum?",
+                qJa: "国立民芸博物館の主な目的の一つは何ですか？",
+                optionsEn: ["To preserve and support Indian crafts", "To display Mughal weapons only", "To teach military history"],
+                optionsJa: ["インドの工芸を保存し支援すること", "ムガル帝国の武器のみを展示すること", "軍事史を教えること"],
+                correct: 0
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizData.forEach((q, qIndex) => {
+                const questionBox = document.createElement('div');
+                questionBox.className = 'p-4 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2';
+                
+                const qText = currentLang === 'ja' ? q.qJa : q.qEn;
+                const options = currentLang === 'ja' ? q.optionsJa : q.optionsEn;
+
+                let html = `<p class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">${qIndex + 1}. ${qText}</p>`;
+                html += `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">`;
+
+                options.forEach((opt, optIndex) => {
+                    const isSelected = userAnswers[qIndex] === optIndex;
+                    html += `
+                        <button onclick="selectAnswer(${qIndex}, ${optIndex})" class="text-left px-3 py-2 text-xs rounded-lg border transition ${isSelected ? 'bg-brand-600 text-white border-brand-600 font-medium shadow-sm' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'}">
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                html += `</div>`;
+                questionBox.innerHTML = html;
+                container.appendChild(questionBox);
+            });
+        }
+
+        function selectAnswer(qIndex, optIndex) {
+            userAnswers[qIndex] = optIndex;
+            renderQuiz();
+        }
+
+        function checkQuizAnswers() {
+            let score = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    score++;
+                }
+            });
+            document.getElementById('quizScoreBadge').innerText = `${score} / ${quizData.length}`;
+            
+            const message = currentLang === 'ja' 
+                ? `正解数: ${score} / ${quizData.length} 問おめでとうございます！` 
+                : `You scored ${score} out of ${quizData.length}! Great fieldwork preparation.`;
+            
+            // Custom banner feedback instead of alert()
+            alertBox(message);
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('quizScoreBadge').innerText = `0 / 6`;
+            renderQuiz();
+        }
+
+        function alertBox(msg) {
+            // Non-blocking friendly banner notification
+            const existing = document.getElementById('customNotification');
+            if (existing) existing.remove();
+
+            const banner = document.createElement('div');
+            banner.id = 'customNotification';
+            banner.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700 flex items-center space-x-3 fade-in text-xs sm:text-sm';
+            banner.innerHTML = `
+                <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+                <span>${msg}</span>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white ml-2"><i class="fa-solid fa-xmark"></i></button>
+            `;
+            document.body.appendChild(banner);
+            setTimeout(() => { if(banner) banner.remove(); }, 5000);
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderChecklist();
+            renderQuiz();
+        }
+    </script>
+</body>
+</html>
+
